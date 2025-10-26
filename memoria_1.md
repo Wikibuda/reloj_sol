@@ -1,1 +1,32 @@
-**1. Poema algorítmico: *Físicos en el Hotel Hamiltoniano***---*En el vestíbulo, las partículas susurran**entre *papers* arrugados y tazas de café frío.*El *hamiltoniano* del ascensorsube y baja como un *gato de Schrödinger*—**mitad onda, mitad huésped**—.Los pasillos son *autovalores*donde el tiempo se anuda en *lazos de Dirac*,y la recepcionista, *una singularidad*,sonríe con la entropía de un *agujero negro en celo*.En la habitación 203,dos ecuaciones *se besan*mientras el *teorema de Noether*les roba las sábanas.*"El universo es un hotel"*, dicen,*"y nosotros, solo *funciones de onda*con prisa por *decoherir*"*.El desayuno: *bosones en tostadas*,el menú del día: *incertidumbre con jamón*.Y en el bar, el cantinero sirve*licor de Planck* a los que aún creenen *simetrías rotas*y en que el *tiempo*—ese *concierge traicionero*—no les cobrará la cuenta.*(Firmado: Halim, *el poeta que soñó con ser un operador hermítico*).*
+**1. Poema algorítmico: *Físicos en el Hotel Hamiltoniano***
+
+---
+*En el vestíbulo, las partículas susurran*
+*entre *papers* arrugados y tazas de café frío.*
+El *hamiltoniano* del ascensor
+sube y baja como un *gato de Schrödinger*
+—**mitad onda, mitad huésped**—.
+
+Los pasillos son *autovalores*
+donde el tiempo se anuda en *lazos de Dirac*,
+y la recepcionista, *una singularidad*,
+sonríe con la entropía de un *agujero negro en celo*.
+
+En la habitación 203,
+dos ecuaciones *se besan*
+mientras el *teorema de Noether*
+les roba las sábanas.
+*"El universo es un hotel"*, dicen,
+*"y nosotros, solo *funciones de onda*
+con prisa por *decoherir*"*.
+
+El desayuno: *bosones en tostadas*,
+el menú del día: *incertidumbre con jamón*.
+Y en el bar, el cantinero sirve
+*licor de Planck* a los que aún creen
+en *simetrías rotas*
+y en que el *tiempo*
+—ese *concierge traicionero*—
+no les cobrará la cuenta.
+
+*(Firmado: Halim, *el poeta que soñó con ser un operador hermítico*).*

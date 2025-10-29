@@ -32,4 +32,4 @@ Un **reloj de sol digital** donde:
 42 6 * * * /usr/bin/python3 /ruta/a/reloj_sol/scripts/sincroniza_memorias.py
 
 Licencia
-MIT (Miralo ).
+MIT (Míralo Intúyelo Tócalo).

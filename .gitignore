@@ -1,0 +1,9 @@
+# Ignorar archivos temporales
+*.pyc
+pycache/
+.DS_Store
+
+
+Ignorar entornos virtuales
+venv/
+.env

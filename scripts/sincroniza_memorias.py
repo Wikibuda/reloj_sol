@@ -1,39 +1,55 @@
+#!/usr/bin/env python3
+"""
+Script para sincronizar memorias diarias con GitHub (reloj_sol).
+- Copia archivos .md desde una carpeta local a reloj_sol/memorias/.
+- Hace commit con la fecha actual.
+- Sube los cambios a GitHub.
+"""
+
 import os
 import shutil
-from datetime import datetime
-import random
 import subprocess
+from datetime import datetime
+from pathlib import Path
 
-# Configuración (personaliza estas rutas)
-DRIVE_PATH = "/Users/gusluna/wikibuda/Memorias_Talladas/"
-GITHUB_REPO = "github.com/Wikibuda/reloj_sol.git"
-LOCAL_TEMP = "/tmp/memorias_temp/"
-TOKEN_GITHUB = "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"
-
-# Versos para los commits (de tus Wattpad)
-versos = [
-    "El tiempo es un hotel donde nunca duermo",
-    "Las partículas susurran entre papers arrugados",
-    "El hamiltoniano del ascensor sube y baja como un gato de Schrödinger",
-    "El universo es un poema escrito en lenguaje de máquina"
-]
+# Configuración (ajusta estas rutas)
+ORIGEN_MEMORIAS = Path.home() / "memorias_diarias"  # Carpeta donde guardas tus .md diarios
+REPO_PATH = Path.home() / "reloj_sol"
+DESTINO_MEMORIAS = REPO_PATH / "memorias"
 
 def sincronizar():
-    # 1. Clonar el repo remoto (solo si no existe)
-    if not os.path.exists(LOCAL_TEMP):
-        subprocess.run(["git", "clone", f"https://{TOKEN_GITHUB}@{GITHUB_REPO}", LOCAL_TEMP], check=True)
+    try:
+        # 1. Verificar que la carpeta origen exista
+        if not ORIGEN_MEMORIAS.exists():
+            print(f"⚠️ Carpeta origen no encontrada: {ORIGEN_MEMORIAS}")
+            return
 
-    # 2. Copiar archivos desde Drive a la carpeta clonado
-    for archivo in os.listdir(DRIVE_PATH):
-        if archivo.endswith(".md"):
-            shutil.copy(os.path.join(DRIVE_PATH, archivo), LOCAL_TEMP)
+        # 2. Copiar nuevos archivos .md a reloj_sol/memorias/
+        copiados = 0
+        for archivo in ORIGEN_MEMORIAS.glob("*.md"):
+            destino = DESTINO_MEMORIAS / archivo.name
+            if not destino.exists():  # Solo copiar si no existe en el repo
+                shutil.copy2(archivo, destino)
+                copiados += 1
+                print(f"📄 Copiado: {archivo.name}")
 
-    # 3. Git: add, commit, push
-    os.chdir(LOCAL_TEMP)
-    subprocess.run(["git", "add", "."], check=True)
-    mensaje = f"{datetime.now().strftime('%d-%m-%Y')}: '{random.choice(versos)}'"
-    subprocess.run(["git", "commit", "-m", mensaje], check=True)
-    subprocess.run(["git", "push", "origin", "main"], check=True)
+        if copiados == 0:
+            print("📅 No hay memorias nuevas para sincronizar.")
+            return
 
-# Ejecutar
-sincronizar()
+        # 3. Hacer commit y push
+        os.chdir(REPO_PATH)
+        fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        subprocess.run(["git", "add", "memorias/"], check=True)
+        subprocess.run(["git", "commit", "-m", f"Sincronizadas memorias ({fecha})"], check=True)
+        subprocess.run(["git", "push"], check=True)
+        print(f"✅ Sincronizados {copiados} archivos a GitHub.")
+
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Error al sincronizar con Git: {e}")
+    except Exception as e:
+        print(f"❌ Error inesperado: {e}")
+
+if __name__ == "__main__":
+    sincronizar()
+

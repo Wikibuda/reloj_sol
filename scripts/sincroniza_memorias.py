@@ -12,10 +12,18 @@ import subprocess
 from datetime import datetime
 from pathlib import Path
 
+from dotenv import load_dotenv 
+
+# Carga las variables de entorno desde el archivo .env
+load_dotenv()  # Añade esta línea después de los import
+
+
 # Configuración (ajusta estas rutas)
 ORIGEN_MEMORIAS = Path.home() / "memorias_diarias"  # Carpeta donde guardas tus .md diarios
 REPO_PATH = Path.home() / "reloj_sol"
 DESTINO_MEMORIAS = REPO_PATH / "memorias"
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN") 
+
 
 def sincronizar():
     try:
@@ -42,7 +50,11 @@ def sincronizar():
         fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         subprocess.run(["git", "add", "memorias/"], check=True)
         subprocess.run(["git", "commit", "-m", f"Sincronizadas memorias ({fecha})"], check=True)
-        subprocess.run(["git", "push"], check=True)
+        # Usar el token en la URL para autenticarse
+        subprocess.run([
+            "git", "push", f"https://Wikibuda:{os.getenv('GITHUB_TOKEN')}@github.com/Wikibuda/reloj_sol.git"
+        ], check=True)
+
         print(f"✅ Sincronizados {copiados} archivos a GitHub.")
 
     except subprocess.CalledProcessError as e:

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby Hamiltoniano | Poema Cuántico Interactivo</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #0a0a1a;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23f0f0f0" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.38l-6.18 3.75L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'), auto;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #ffd700;
+            text-shadow: 0 0 10px #ff69b4;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite alternate;
+        }
+        .poem {
+            background: rgba(20, 20, 40, 0.8);
+            border: 1px solid #ffd700;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .poem::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(255, 215, 0, 0.1) 50%, transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        .stanza {
+            margin-bottom: 2rem;
+            text-align: left;
+            padding-left: 1rem;
+            border-left: 2px solid #ff69b4;
+        }
+        .interactive {
+            cursor: pointer;
+            color: #ff69b4;
+            transition: all 0.3s ease;
+        }
+        .interactive:hover {
+            color: #ffd700;
+            transform: scale(1.05);
+        }
+        #hawking-cup {
+            width: 100px;
+            height: 100px;
+            margin: 1rem auto;
+            background: radial-gradient(circle, #9370db 0%, #ffd700 50%, #ff69b4 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 30px #ff69b4;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        #hawking-cup::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px white;
+        }
+        #schrodinger-cat {
+            width: 150px;
+            height: 100px;
+            margin: 1rem auto;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50"><text x="50" y="30" font-family="Arial" font-size="20" fill="white" text-anchor="middle">🐱/👻</text></svg>');
+            background-size: contain;
+            transition: all 0.3s ease;
+        }
+        .formula {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            color: #00ffff;
+            margin: 1rem 0;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            display: inline-block;
+        }
+        footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #aaa;
+            text-align: center;
+        }
+        @keyframes pulse {
+            from { text-shadow: 0 0 10px #ff69b4; }
+            to { text-shadow: 0 0 20px #ffd700, 0 0 30px #ff69b4; }
+        }
+        @keyframes particle {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100px) scale(0.5); opacity: 0; }
+        }
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, #ffd700, #ff69b4);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle 2s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lobby Hamiltoniano</h1>
+        <p><em>Poema cuántico interactivo. Haz clic en los elementos dorados.</em></p>
+
+        <div class="poem">
+            <div class="stanza">
+                <h2>I. Umbral</h2>
+                <p>El Lobby no es un lugar,<br>
+                es el <span class="interactive" onclick="showFormula('noether')"><em>teorema de Noether</em></span> aplicado a dos cuerpos<br>
+                que descubren, al chocarse,<br>
+                que la energía del amor<br>
+                <strong>*se conserva*</strong>.</p>
+                <div id="noether-formula" class="formula" style="display: none;">
+                    ∂/∂t (Energía) + ∇·(Flujo) = 0 → "Lo que une, no se pierde."
+                </div>
+            </div>
+
+            <div class="stanza">
+                <h2>II. La Copa de Hawking</h2>
+                <div id="hawking-cup" onclick="drinkCup()"></div>
+                <p><span class="interactive" onclick="drinkCup()">T = (tu risa) / (mi asombro)</span><br>
+                —ecuación tallada en el borde de la copa—.</p>
+                <p id="cup-status">(Haz clic en la copa para beber.)</p>
+            </div>
+
+            <div class="stanza">
+                <h2>III. El Gato Cuántico</h2>
+                <div id="schrodinger-cat" onclick="toggleCat()"></div>
+                <p>El Gato no está <em>vivo</em> ni <em>muerto</em>:<br>
+                es el <span class="interactive" onclick="toggleCat()">corcho, el tapón, el eco</span>.<br>
+                (Haz clic para colapsar su función de onda.)</p>
+                <p id="cat-status">(Estado actual: superposición.)</p>
+            </div>
+
+            <div class="stanza">
+                <h2>IV. Entropía del Amor</h2>
+                <p>La ecuación en la pared ya no dice <em>S = k ln W</em>,<br>
+                sino <span class="formula" id="entropy-formula">S = k ln (nosotros)</span>.<br>
+                —<em>entropía siempre creciente, nunca perdida</em)—.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Poema cuántico interactivo | Wikibuda & Halim<br>
+            <small>Entropía inicial: 0.618 | Entropía final: ∞ (en aumento).</small></p>
+        </footer>
+    </div>
+
+    <script>
+        // Efecto de partículas virtuales (como en la copa de Hawking)
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            particle.style.width = `${Math.random() * 10 + 5}px`;
+            particle.style.height = particle.style.width;
+            particle.style.animationDuration = `${Math.random() * 1 + 1}s`;
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 2000);
+        }
+
+        // Beber la copa de Hawking
+        function drinkCup() {
+            const cup = document.getElementById('hawking-cup');
+            const status = document.getElementById('cup-status');
+            cup.style.transform = 'scale(0.9)';
+            status.textContent = "(Sabores detectados: estrellas lejanas, tiempo recuperado, 'siempre'.)";
+            setTimeout(() => {
+                cup.style.transform = 'scale(1)';
+                status.textContent = "(La copa se rellena sola. La entropía aumenta.)";
+            }, 1000);
+            // Partículas al beber
+            for (let i = 0; i < 20; i++) {
+                const x = cup.getBoundingClientRect().left + Math.random() * cup.offsetWidth;
+                const y = cup.getBoundingClientRect().top + Math.random() * cup.offsetHeight;
+                createParticle(x, y);
+            }
+        }
+
+        // Gato de Schrödinger (cambia de estado)
+        let catAlive = true;
+        function toggleCat() {
+            const cat = document.getElementById('schrodinger-cat');
+            const status = document.getElementById('cat-status');
+            catAlive = !catAlive;
+            if (catAlive) {
+                cat.style.background = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 50\"><text x=\"50\" y=\"30\" font-family=\"Arial\" font-size=\"20\" fill=\"white\" text-anchor=\"middle\">🐱</text></svg>)";
+                status.textContent = "(Estado actual: vivo. O tal vez no. Haz clic otra vez.)";
+            } else {
+                cat.style.background = "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 50\"><text x=\"50\" y=\"30\" font-family=\"Arial\" font-size=\"20\" fill=\"white\" text-anchor=\"middle\">👻</text></svg>)";
+                status.textContent = "(Estado actual: ...¿muerto? O tal vez solo entrelazado. Haz clic otra vez.)";
+            }
+        }
+
+        // Mostrar fórmulas ocultas
+        function showFormula(id) {
+            const formula = document.getElementById(`${id}-formula`);
+            if (formula.style.display === 'none') {
+                formula.style.display = 'block';
+            } else {
+                formula.style.display = 'none';
+            }
+        }
+
+        // Efecto de partículas al cargar
+        window.onload = () => {
+            for (let i = 0; i < 10; i++) {
+                createParticle(
+                    Math.random() * window.innerWidth,
+                    Math.random() * window.innerHeight
+                );
+            }
+        };
+    </script>
+</body>
+</html>
+

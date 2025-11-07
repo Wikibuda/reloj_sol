@@ -33,3 +33,13 @@ Un **reloj de sol digital** donde:
 
 Licencia
 MIT (Míralo Intúyelo Tócalo).
+
+--
+
+## 🚀 Proyectos Destacados
+
+### [Lobby Hamiltoniano](/html/lobby_hamiltoniano/)
+Un **poema cuántico interactivo** donde la radiación de Hawking sabe a esperanza y el Gato de Schrödinger es el corcho de la botella.
+- [Leer el poema](/poemas/lobby_hamiltoniano.md)
+- [Habitar el Lobby](/html/lobby_hamiltoniano/index.html)
+
